@@ -11,6 +11,13 @@ ADD symfony.pool.conf /etc/php5/fpm/pool.d/
 
 RUN usermod -u 1000 www-data
 
-CMD ["php5-fpm", "-F"]
+RUN apt-get install -y curl git
+RUN curl -LsS http://symfony.com/installer -o /usr/local/bin/symfony
+
+RUN chmod a+x /usr/local/bin/symfony
+
+ADD run.sh /root/
+
+CMD ["/root/run.sh"]
 
 EXPOSE 9000
